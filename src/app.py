@@ -39,6 +39,50 @@ activities = {
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
     }
+    ,
+
+    # Sports activities
+    "Soccer Team": {
+        "description": "Competitive soccer training and matches",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 6:00 PM",
+        "max_participants": 22,
+        "participants": ["sara@mergington.edu", "liam@mergington.edu"]
+    },
+    "Volleyball Team": {
+        "description": "Indoor volleyball practice and interschool tournaments",
+        "schedule": "Mondays and Wednesdays, 4:30 PM - 6:00 PM",
+        "max_participants": 16,
+        "participants": ["noah@mergington.edu", "zoe@mergington.edu"]
+    },
+
+    # Artistic activities
+    "Art Club": {
+        "description": "Drawing, painting and portfolio development",
+        "schedule": "Mondays, 4:00 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": ["mia@mergington.edu", "lucas@mergington.edu"]
+    },
+    "Drama Club": {
+        "description": "Acting workshops, rehearsals and school productions",
+        "schedule": "Thursdays, 6:00 PM - 8:00 PM",
+        "max_participants": 25,
+        "participants": ["isabella@mergington.edu", "ethan@mergington.edu"]
+    },
+
+    # Intellectual activities
+    "Math Olympiad Club": {
+        "description": "Problem solving and math competition preparation",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": ["oliver@mergington.edu", "amelia@mergington.edu"]
+    },
+    "Debate Club": {
+        "description": "Public speaking, argumentation and debate tournaments",
+        "schedule": "Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 20,
+        "participants": ["grace@mergington.edu", "jack@mergington.edu"]
+    }
+    
 }
 
 
@@ -61,7 +105,9 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
-
+# Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")      
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
